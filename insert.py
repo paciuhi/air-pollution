@@ -15,7 +15,7 @@ json = requests.get(url).json()
 #     s = S()
 #     s.execute("SELECT add_to_lokalizacjaNOWE(" + str(row['id'])+","+"'"+str(row['kraj'])+"'"+ ")")
 #     s.commit()
-
+'''insert danych'''
 czujniki = []
 for i, result in enumerate(json):
     row = {}
