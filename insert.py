@@ -5,17 +5,8 @@ from sqlalchemy.orm import sessionmaker
 url = 'http://api.luftdaten.info/static/v1/data.json'
 json = requests.get(url).json()
 
-# lokalizacja = []
-# for i, result in enumerate(json):
-#     row = {}
-#     #row['id'] = i
-#     row['id'] = result['location']['id']
-#     row['kraj'] = result['location']['country']
-#     S = sessionmaker(bind=engine)
-#     s = S()
-#     s.execute("SELECT add_to_lokalizacjaNOWE(" + str(row['id'])+","+"'"+str(row['kraj'])+"'"+ ")")
-#     s.commit()
-'''insert danych'''
+
+'''insert danych do tabeli czujniki oraz pomiary'''
 czujniki = []
 for i, result in enumerate(json):
     row = {}
