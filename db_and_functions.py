@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 import psycopg2
 
-#tworzenie silnika połączenia z bazą danych:
+'''tworzenie silnika połączenia z bazą danych:'''
 engine = create_engine('postgresql+psycopg2://postgres:post1@localhost:5432')
 
 metadata = MetaData()
@@ -16,7 +16,7 @@ session = Session()
 
 
 
-#tworzenie tabel:
+'''tworzenie tabel:'''
 class Lokalizacja(Base):
     __tablename__ = "lokalizacja"
     id = Column(Integer, primary_key=True)
@@ -49,7 +49,7 @@ Czujniki.__table__.create(bind=engine, checkfirst=True)
 Pomiary.__table__.create(bind=engine, checkfirst=True)
 
 
-#funkcje insert:
+'''funkcje insert:'''
 
 QUERY_lokalizacja="""
 CREATE OR REPLACE FUNCTION add_to_lokalizacjaNOWE( _id INT, _kraj VARCHAR(55) ) RETURNS VOID AS $$
