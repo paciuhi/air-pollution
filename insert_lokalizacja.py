@@ -13,6 +13,8 @@ geolocator = Nominatim(timeout=100, user_agent='geo')
 url = 'http://api.luftdaten.info/static/v1/data.json'
 jsonH = requests.get(url).json()
 
+'''insert danych do tabeli lokalizacja wraz z uzupełnieniem adresu czujnika'''
+
 for i, result in enumerate(jsonH):
     row = {}
 
@@ -79,70 +81,3 @@ for i, result in enumerate(jsonH):
     s.commit()
 
     time.sleep(1.1)
-
-# import time
-# from sqlalchemy import *
-# from sqlalchemy.orm import sessionmaker
-# import requests
-# import geocoder
-# from db_and_functions import engine
-#
-#
-# for i in range(1):
-#     url = 'http://api.luftdaten.info/static/v1/data.json'
-#     jsonH = requests.get(url).json()
-#
-#     for i, result in enumerate(jsonH):
-#         row = {}
-#
-#         id = result['location']['id']
-#         dlugoscD = result['location']['longitude']
-#         szerokoscS = result['location']['latitude']
-#         dlugosc = float((dlugoscD))
-#         szerokosc = float((szerokoscS))
-#         g = geocoder.locationiq([szerokosc, dlugosc],key='d2550e071f4dbe', method='reverse', language='en')
-#         json = g.json
-#         print(dlugosc)
-#         print(szerokosc)
-#         if json is not None:
-#             if ('country' in json['raw']['address']):
-#                 kraj = json['raw']['address']['country']
-#                 if "'" in kraj:
-#                     kraj=kraj.replace("'", "''")
-#
-#                 print(kraj)
-#             else:
-#                 kraj='unavailable'
-#
-#             if ('town' in json['raw']['address']):
-#                 miejscowosc = json['raw']['address']['town']
-#                 if "'" in miejscowosc:
-#                     miejscowosc=miejscowosc.replace("'", "''")
-#
-#                 print(miejscowosc)
-#             else:
-#                 miejscowosc='unavailable'
-#
-#             if ('building' in json['raw']['address']):
-#                 nr = json['raw']['address']['building']
-#                 if "'" in nr:
-#                     nr=nr.replace("'", "''")
-#
-#                 print(nr)
-#             else:
-#                 nr='unavailable'
-#
-#             if ('road' in json['raw']['address']):
-#                 ulica = json['raw']['address']['road']
-#                 if "'" in ulica:
-#                     ulica=ulica.replace("'", "''")
-#                 print(ulica)
-#             else:
-#                 ulica='unavailable'
-#
-#             S = sessionmaker(bind=engine)
-#             s = S()
-#             s.execute("SELECT adresy(" + str(id)  + "," + "'" + str(kraj) + "'" + "," + "'" + miejscowosc + "'" + "," + "'" + ulica + "'" + "," + "'"+
-#                 nr+ "'" + ")")
-#             s.commit()
-#         time.sleep(1.2)
